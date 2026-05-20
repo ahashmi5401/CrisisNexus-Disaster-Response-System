@@ -1,0 +1,80 @@
+# Implementation Plan - Data Integrity and Telemetry Resolution
+
+This plan resolves the user identity mismatch, UNKNOWN card headers, and false-positive mobile degradation telemetry warnings on the NGO operations dashboard.
+
+## User Review Required
+
+> [!NOTE]
+> All changes are strictly confined to the Next.js NGO operations dashboard (`crisis_nexus_ngo/`) and preserve the existing Firestore schemas and backend severity fusion logic.
+
+## Proposed Changes
+
+---
+
+### Identity and Normalizer Layer
+
+#### [MODIFY] [displayUtils.ts](file:///c:/Users/ahash/Downloads/crio-research-v/crisis_nexus_ngo/lib/displayUtils.ts)
+* **Email Resolution Robustness:** Update `normalizeDisplayCrisis` (line 124) so that `reporterEmail` prioritizes dynamic `profileData` first:
+  ```typescript
+  const reporterEmail: string = profileData?.email || profileData?.profile?.email || citizenInput.userEmail || crisis.userEmail || "";
+  ```
+* **Identity Resolution Robustness:** Robustify `resolveCitizenIdentity` fallback pipeline to include `profileData?.email` and `profileData?.profile?.email` immediately after name options to ensure a fallback to their registered email before falling back to legacy input or UID strings.
+
+---
+
+### Relief Pipeline State and Resolution
+
+#### [MODIFY] [ReliefQueue.tsx](file:///c:/Users/ahash/Downloads/crio-research-v/crisis_nexus_ngo/components/ReliefQueue.tsx)
+* **Profile Cache State:** Introduce a component-level profile cache:
+  ```typescript
+  const [userProfiles, setUserProfiles] = useState<Record<string, any>>({});
+  ```
+* **Firestore Ingestion Sync:** Add a standard React hook that checks `requests`, gathers unique `userId`s, fetches their corresponding documents from `users/{userId}` in parallel, and merges them into `userProfiles`.
+* **Citizen Name Resolution:** Pass the cached profile object to `resolveCitizenIdentity` for `caseIdentity` (around line 238).
+
+---
+
+### Incident Header Branding
+
+#### [MODIFY] [CrisisCard.tsx](file:///c:/Users/ahash/Downloads/crio-research-v/crisis_nexus_ngo/components/CrisisCard.tsx)
+* **Capitalized Header Cleanup:** Update the incident `eventName` resolution logic to filter out `"unknown"` subtype values and use the clean capitalized fallback pattern established in the map layer banner:
+  ```typescript
+  const eventName = (
+    crisis.title || 
+    (crisis.subType && crisis.subType !== "unknown" ? crisis.subType : null) || 
+    crisis.eventType || 
+    "CRITICAL INCIDENT"
+  ).toUpperCase();
+  ```
+
+---
+
+### Telemetry Safety Layer
+
+#### [MODIFY] [DataQualityLayer.tsx](file:///c:/Users/ahash/Downloads/crio-research-v/crisis_nexus_ngo/components/DataQualityLayer.tsx)
+* **Refactor Degradation Heuristic:** Update `sourceMode` logic to ensure mobile origin alone is not flagged as degraded. Only mark as `MOBILE_DEGRADED` if the telemetry coordinates are missing or stale:
+  ```typescript
+  const isMobileSource = item.client === 'mobile' || item.source === 'mobile' || item.isMobileDegraded;
+  const isMissingLocation = !item.location?.lat && type !== 'user' && type !== 'intelligence';
+  const isStaleLocation = item.stale;
+  
+  if (isMobileSource && (isMissingLocation || isStaleLocation)) {
+    sourceMode = "MOBILE_DEGRADED";
+  }
+  ```
+
+---
+
+## Verification Plan
+
+### Automated Verification
+* Compile the Next.js codebase to guarantee complete TypeScript validation and error-free builds:
+  `npm run build`
+
+### Manual Verification
+* Run the Next.js development server to verify live behavior:
+  `npm run dev`
+* Launch a browser subagent to visual check the updated dashboard, confirming:
+  1. The left queue cards show the correct citizen identity (e.g. dynamic email/name) instead of the raw UID string.
+  2. The family intelligence drawer and cards display without false-positive `MOBILE_DEGRADED` warnings.
+  3. No `"UNKNOWN"` titles are visible on the crisis card list headers.

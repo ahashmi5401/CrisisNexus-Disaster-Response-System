@@ -1,0 +1,59 @@
+# Firestore Index Audit and Dependency Resolution Plan
+
+## Goal Description
+Audit `crisisProcessor.js` to locate the exact Firestore query causing the runtime failure `FAILED_PRECONDITION: The query requires an index`. Identify if the query is necessary, refactor any unnecessary queries using snapshot data, and output the required index specifications for necessary queries. Finally, manually test signal submissions and verify queue status changes.
+
+---
+
+## Proposed Auditing & Changes
+
+### 1. Database Queries Identified in crisisProcessor.js
+We audited all collection-level `.get()` queries against the target collections: `event_queue`, `users`, `crises`, `aid_requests`, and `relief_requests`.
+
+*   **`event_queue`**:
+    *   *Query*: `db.collection("event_queue").where("status", "==", "pending").get()` (Line 1092 in `system_health` health-check function).
+    *   *Analysis*: This query uses a single-field equality filter on `status`. Firestore automatically creates single-field indexes, so it does not require a composite index. However, it is queried inside `system_health` which is not the main onCreate trigger.
+*   **`users`**:
+    *   *Query*: None. It only uses `.doc(userId).get()` (Line 579) to retrieve onboarding profiles. Document fetches never require indexes.
+*   **`crises`**:
+    *   *Query*: None. It only writes data to `.doc(eventId).set()`.
+*   **`aid_requests`**:
+    *   *Query*: None. Inside `fetchFirestoreContext`, there is `db.collection("aid_requests").where("createdAt", ">=", oneHourAgo).orderBy("createdAt", "desc").limit(20).get()`.
+    *   *Analysis*: This is a single-field query with a range filter and sort on the same field (`createdAt`). Standard single-field indexes support this.
+*   **`relief_requests`**:
+    *   *Query*: `db.collection("relief_requests").where("userId", "==", userId).where("subType", "==", normalizedSubType).where("status", "in", ["pending", "assigned", "in_progress"]).limit(1).get()` (Line 766 in `crisisProcessor`).
+    *   *Analysis*: This query uses multiple equality filters on `userId` and `subType`, and a member comparison `in` filter on `status`. In Firestore, combining multiple equality filters and an `in` filter requires a **Composite Index** on the `relief_requests` collection.
+
+---
+
+## Action Plan
+
+### Step 1: Create index_audit.md Proof Artifact
+We will create the proof file `artifacts/index_audit.md` (saved to both conversation artifacts and workspace `crisis_nexus/artifacts/index_audit.md`) detailing:
+- Offending query details.
+- Line number and filename.
+- Exact composite index specification (collection, fields, sort direction).
+- Recommendation of keeping it because it is critical for duplicate/anti-fraud detection in the ReliefCycle.
+
+### Step 2: Refactor Unnecessary event_queue Backlog Queries (Optional Optimization)
+The health check endpoint `system_health` does:
+```javascript
+const pendingSnapshot = await db.collection("event_queue").where("status", "==", "pending").get();
+const backlogSize = pendingSnapshot.size;
+```
+To be absolutely safe and avoid any potential runtime failures or performance overhead on `event_queue` queries, we will refactor `system_health` to use the pre-aggregated `queue_backlog_size` from `system_metrics` realtime document, matching the preferred pattern of not querying `event_queue` again when the data exists elsewhere.
+
+### Step 3: Run Verification
+We will:
+1. Verify the code parses and compiles with zero errors.
+2. Submit a mock signal report using the Flutter app.
+3. Observe if the `event_queue` status successfully transitions from `pending` to `completed`.
+
+---
+
+## Verification Plan
+
+### Automated/Manual Verification
+- Deploy the updated Cloud Function (if needed) or run locally to verify function logic.
+- Submit a mock signal report in the app UI.
+- Verify that `event_queue.status` transitions from `pending` to `completed` in Firestore.

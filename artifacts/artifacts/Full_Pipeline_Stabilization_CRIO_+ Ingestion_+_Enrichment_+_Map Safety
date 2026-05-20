@@ -1,0 +1,67 @@
+# Implementation Plan: Full Pipeline Stabilization (CRIO + Ingestion + Enrichment + Map Safety)
+
+We will implement a complete, robust system-wide stabilization layer across the CRIO Ingestion, Fusion Engine, Identity Resolver, Map Safety, and Data Quality components.
+
+---
+
+## User Review Required
+
+> [!IMPORTANT]
+> - **Zero Schema/UI Modifications:** This is a logic-only and safety-only patch pass. No Firestore schemas will be modified, no fields will be deleted, and no visual UI structures will be changed.
+> - **Impact Area:** Coordinates safety, name/email lookup chains, ingestion-level titles, description prioritization, and CRIO scoring engine consistency rules.
+
+---
+
+## Proposed Changes
+
+### 1. CRIO Ingestion Safety Layer & Fusion engine consistency fix
+#### [MODIFY] [crisisProcessor.js](file:///c:/Users/ahash/Downloads/crio-research-v/crisis_nexus/functions/crisisProcessor.js)
+- **Title Guarantee System:** In `crisisProcessor.js` standard and degraded paths, ensure the crisis title is never `"Unknown"` or empty.
+  ```javascript
+  const titleString = (
+    payload.title ||
+    payload.subType ||
+    payload.eventType ||
+    "UNCLASSIFIED INCIDENT"
+  ).trim();
+  ```
+- **Description Dual Storage Rule:**
+  - Preserve `rawDescription = payload.description || ""`
+  - Preserve `aiSummary = generatedAI || null`
+  - Ensure the AI summary never overwrites the citizen description.
+- **Identity Guarantee:** Ingest `citizenInput` and fallback emails/IDs correctly:
+  - `userEmail = payload.userEmail || payload.citizenInput?.userEmail || "N/A"`
+- **Fusion Engine Consistency & Gating:** In `computeDecisionEngine`:
+  - Enforce: if riskLevel is `"HIGH"` and severity is `"LOW"`, adjust riskLevel or severity to be consistent.
+  - Confidence gating: if `confidence < 0.6`, set `recommendedAction = "REVIEW_REQUIRED"` and reduce `priorityScore` by 25%.
+  - Silent contradiction correction: set `decisionEngine.flag = "SELF_CORRECTED"`.
+
+### 2. Identity Enrichment Layer & Display Priority
+#### [MODIFY] [displayUtils.ts](file:///c:/Users/ahash/Downloads/crio-research-v/crisis_nexus_ngo/lib/displayUtils.ts)
+- **Identity Resolver:** Enhance `resolveCitizenIdentity` to follow the exact priority chain:
+  `profile.displayName || displayName || name || citizenInput.name || citizenInput.userEmail || userEmail || userId || "Unknown Reporter"`
+- **Email Resolver:** Resolve `citizenEmail` in order:
+  `userEmail || citizenInput.userEmail || "N/A"`.
+- **Display Priority Card Rule:**
+  - Primary text: `citizenInput.description || rawDescription || description`
+  - Secondary text: `aiSummary` (never allow AI to override citizen description).
+
+#### [MODIFY] [normalizeNGORecord.ts](file:///c:/Users/ahash/Downloads/crio-research-v/crisis_nexus_ngo/lib/normalizeNGORecord.ts)
+- Update `normalizeNGORecord` to map these exact resolved identity, email, and description priorities cleanly.
+
+### 3. Map Safety Layer
+#### [MODIFY] [MapOpsLayer.tsx](file:///c:/Users/ahash/Downloads/crio-research-v/crisis_nexus_ngo/components/MapOpsLayer.tsx)
+- Ensure markers are skipped unless `lat`/`lng` are finite numbers (not NaN, null, or undefined).
+- No Karachi center or synthetic placeholders fallback. If no geolocated pins exist, center coordinates are null and it shows clean warning overlay: `"No valid coordinates available"`.
+
+### 4. Data Quality Layer
+#### [MODIFY] [DataQualityLayer.tsx](file:///c:/Users/ahash/Downloads/crio-research-v/crisis_nexus_ngo/components/DataQualityLayer.tsx)
+- **Identity Evaluation Fix:** Include all types: `type === "crisis" || type === "relief" || type === "user"`.
+- **False MOBILE_DEGRADED Check:** Trigger only if `isMobileSource AND (missing lat/lng OR stale location)` rather than just being a mobile source.
+
+---
+
+## Verification Plan
+
+### Automated Verification
+- Run `npm run build` inside `crisis_nexus_ngo` to ensure 100% successful Next.js compile and TypeScript verification.

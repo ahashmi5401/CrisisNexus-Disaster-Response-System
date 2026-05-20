@@ -1,0 +1,17 @@
+{
+  "name": "crio-research-v",
+  "version": "1.0.0",
+  "description": "CrisisNexus is a production-grade, highly resilient disaster response coordination platform. The system connects ground-level citizen reports with centralized Non-Governmental Organization (NGO) Emergency Operations Centers (EOC) by combining real-time mobile telemetry with a dual-mode AI reasoning engine — the **CRIO (Crisis Response Intelligence Orchestrator)**. Designed for high availability under network and API degradation, CrisisNexus guarantees absolute data integrity through a zero-fabrication normalizer.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "firebase-admin": "^13.10.0"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-05-20T00:33:00Z",
+  "audit_state": "BEFORE_FIXES",
+  "sample_document_analysis": {
+    "collection": "crises",
+    "document_id": "test_crisis_degraded_before",
+    "detected_issues": [
+      "AI_OVERRIDE_OF_CITIZEN_TRUTH",
+      "FALSE_POSITIVE_IDENTITY_UNVERIFIED",
+      "FALSE_POSITIVE_MOBILE_DEGRADED_TRIGGER",
+      "MAP_CRASH_RISK_ON_EMPTY_COORDINATES",
+      "LOSS_OF_DECISION_ENGINE_TELEMETRY"
+    ]
+  },
+  "detected_fallbacks": {
+    "title_fallbacks": [
+      "Unknown",
+      "Fusion Zone",
+      "Target Zone"
+    ],
+    "description_fallbacks": [
+      "Local simulator execution due to FUSION mode activation",
+      "Emergency heuristic fallback activated due to missing key"
+    ]
+  },
+  "identity_resolution_state": {
+    "isCitizenIdentityVerified_arguments": "record only (no profileData propagation)",
+    "display_label_fallback": "Unknown Reporter",
+    "status_on_valid_profile": "UNVERIFIED"
+  },
+  "map_coordinate_validity": {
+    "circle_radius_guard": "None (raw crisis.radiusKm * 1000 passed to Google Map Circle)",
+    "map_center_guard": "None (clusteredMarkers[0] direct access without checking numbers)",
+    "crash_status": "HIGH_RISK_ON_BAD_DATA"
+  },
+  "description_priority_status": {
+    "primary": "record.description (often contains AI fallback text)",
+    "secondary": "citizenInput.description (hidden or overridden)",
+    "outcome": "Citizen truth polluted by synthetic system messages"
+  }
+}

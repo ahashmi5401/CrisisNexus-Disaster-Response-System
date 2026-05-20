@@ -1,0 +1,1090 @@
+{
+  "crises": [
+    {
+      "id": "0DnYR9QRpWAReYSc0cna",
+      "eventType": "crisis",
+      "location": {
+        "name": "Target Zone",
+        "lng": 67.07163612536083,
+        "lat": 24.955639154087653
+      },
+      "title": "medical",
+      "rawDecision": {
+        "systemExplanation": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+        "confidence": 0.57,
+        "priorityOrder": [
+          "hybrid_heuristic"
+        ],
+        "crises": [
+          {
+            "type": "Unknown",
+            "expectedDurationHours": 12,
+            "affectedPopulation": null,
+            "escalationPattern": "Stable",
+            "id": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+            "location": {
+              "reliabilityScore": 0.34,
+              "name": "Hybrid Zone",
+              "radiusKm": 1.5
+            },
+            "confidence": 0.57,
+            "severity": "CRITICAL"
+          }
+        ]
+      },
+      "aiSummary": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+      "fallbackReason": "timeout",
+      "description": "Liver Cancer",
+      "time": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779241432,
+        "nanoseconds": 607000000
+      },
+      "history": [
+        {
+          "timestamp": "2026-05-20T01:47:35.841Z",
+          "action": "MEDICAL_TRIAGED",
+          "byName": "Muhammad Ayan Hashmi",
+          "by": "jKvePqmssITi1X7gH5YdT4qZUfI2",
+          "notes": "Medical Triage registered: 1 ambulance"
+        },
+        {
+          "timestamp": "2026-05-20T01:56:14.998Z",
+          "action": "TRIAGED",
+          "byName": "Coordinator",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "notes": "Incident status successfully triaged by Regional Coordinator."
+        },
+        {
+          "byName": "Coordinator",
+          "notes": "Incident status successfully triaged by Regional Coordinator.",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "timestamp": "2026-05-20T01:56:23.615Z",
+          "action": "TRIAGED"
+        },
+        {
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "byName": "Coordinator",
+          "notes": "Incident status successfully triaged by Regional Coordinator.",
+          "action": "TRIAGED",
+          "timestamp": "2026-05-20T01:56:29.051Z"
+        },
+        {
+          "timestamp": "2026-05-20T02:00:33.216Z",
+          "action": "ASSIGNED",
+          "byName": "Coordinator",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "notes": "Incident field ownership assigned to Rescue Squad Commander (rescue)."
+        },
+        {
+          "timestamp": "2026-05-20T02:00:41.285Z",
+          "action": "ASSIGNED",
+          "byName": "Coordinator",
+          "notes": "Incident field ownership assigned to Emergency Logistics Director (logistics).",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2"
+        },
+        {
+          "byName": "Coordinator",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "notes": "Incident field ownership assigned to Rescue Squad Commander (rescue).",
+          "timestamp": "2026-05-20T02:00:47.671Z",
+          "action": "ASSIGNED"
+        },
+        {
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "byName": "Coordinator",
+          "notes": "Incident field ownership assigned to Emergency Logistics Director (logistics).",
+          "timestamp": "2026-05-20T02:03:57.975Z",
+          "action": "ASSIGNED"
+        },
+        {
+          "byName": "Coordinator",
+          "notes": "Incident field ownership assigned to Medical Dispatch Commander (medical_team).",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "action": "ASSIGNED",
+          "timestamp": "2026-05-20T02:04:04.271Z"
+        },
+        {
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "notes": "Incident field ownership updated to departments: m, e, d, i, c, a, l, _, t, e, a, m, rescue.",
+          "byName": "Coordinator",
+          "action": "ASSIGNED",
+          "timestamp": "2026-05-20T02:06:11.049Z"
+        },
+        {
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "byName": "Coordinator",
+          "notes": "Incident field ownership updated to departments: m, e, d, i, c, a, l, _, t, e, a, m, rescue.",
+          "timestamp": "2026-05-20T02:06:30.870Z",
+          "action": "ASSIGNED"
+        },
+        {
+          "action": "ASSIGNED",
+          "timestamp": "2026-05-20T02:06:35.821Z",
+          "notes": "Incident field ownership updated to departments: m, e, d, i, c, a, l, _, t, e, a, m.",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "byName": "Coordinator"
+        },
+        {
+          "notes": "Incident field ownership updated to departments: m, e, d, i, c, a, l, _, t, e, a, m, rescue.",
+          "byName": "Coordinator",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "action": "ASSIGNED",
+          "timestamp": "2026-05-20T02:07:23.342Z"
+        },
+        {
+          "byName": "Coordinator",
+          "notes": "Incident field ownership updated to departments: m, e, d, i, c, a, l, _, t, e, a, m.",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "action": "ASSIGNED",
+          "timestamp": "2026-05-20T02:07:32.954Z"
+        },
+        {
+          "timestamp": "2026-05-20T02:08:10.325Z",
+          "action": "ASSIGNED",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "byName": "Coordinator",
+          "notes": "Incident field ownership updated to departments: rescue."
+        },
+        {
+          "action": "ASSIGNED",
+          "timestamp": "2026-05-20T02:08:41.775Z",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "byName": "Coordinator",
+          "notes": "Incident field ownership updated to departments: rescue."
+        },
+        {
+          "timestamp": "2026-05-20T02:11:24.331Z",
+          "action": "DISPATCHED",
+          "byName": "rescue ",
+          "by": "uHNyYo7IZyOt7xtNPZjpIkpgj0X2",
+          "notes": "Rescue team deployed: [A edhi embulane , with first aid] dispatched to incident coordinates."
+        },
+        {
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "notes": "Incident coordinates contained. Resolution certificate authorized by Coordinator.",
+          "byName": "Coordinator",
+          "timestamp": "2026-05-20T02:13:51.189Z",
+          "action": "RESOLVED"
+        }
+      ],
+      "processingMode": "hybrid",
+      "severity": "CRITICAL",
+      "confidence": 0.79,
+      "timestamp": "2026-05-20T01:43:52.463Z",
+      "radiusKm": 1.5,
+      "dataSources": [
+        "trust_fusion_heuristic"
+      ],
+      "affectedPopulation": null,
+      "impactScore": 0,
+      "assignedRole": "rescue",
+      "householdImpact": {
+        "vulnerabilityScore": 0,
+        "totalIndividuals": 0,
+        "affectedHouseholds": 0
+      },
+      "crisisId": "0DnYR9QRpWAReYSc0cna",
+      "decisionEngine": {
+        "priorityScore": 53,
+        "confidence": 0.57,
+        "recommendedAction": "ALLOCATE_RESOURCES",
+        "reasoning": [
+          "Low severity event detected",
+          "Small geographic radius impact (2km)",
+          "AI fusion confidence supports priority assessment"
+        ],
+        "riskLevel": "MEDIUM"
+      },
+      "assignedTo": "rescue",
+      "medicalNotes": "1 ambulance",
+      "regionalClusterId": "cluster_24_67",
+      "assignedRoles": [
+        "rescue"
+      ],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779241439,
+        "nanoseconds": 192000000
+      },
+      "subType": "unknown",
+      "assignedTeam": "A edhi embulane , with first aid",
+      "citizenInput": {
+        "userId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+        "severity": "CRITICAL",
+        "description": "Liver Cancer",
+        "userEmail": "hashmiayan386@gmail.com"
+      },
+      "status": "resolved",
+      "ciroIntelligenceId": "GV0gcNforMznjcElQfhL",
+      "priorityScore": 28.45,
+      "analysis": {
+        "contradictionLevel": "NONE",
+        "severityBadge": "CITIZEN OVERRIDE",
+        "citizenSeverity": "CRITICAL",
+        "aiSeverity": "LOW",
+        "source": "citizen_override",
+        "finalSeverity": "CRITICAL"
+      },
+      "confidenceScore": 0.79,
+      "keyFactors": [
+        "ai_agent_verification",
+        "multi_source_fusion"
+      ],
+      "fallbackTriggered": true
+    },
+    {
+      "id": "AEFPGt9qtMgU7Mv11gr9",
+      "confidenceScore": 0.79,
+      "fallbackTriggered": true,
+      "keyFactors": [
+        "ai_agent_verification",
+        "multi_source_fusion"
+      ],
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779292659,
+        "nanoseconds": 945000000
+      },
+      "citizenInput": {
+        "description": "Heart Attack , Malaria",
+        "severity": "CRITICAL",
+        "userId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+        "userEmail": "hashmiayan386@gmail.com"
+      },
+      "subType": "unknown",
+      "status": "NEW",
+      "ciroIntelligenceId": "y0PynWSTHFJMRtou2g3j",
+      "priorityScore": 28.45,
+      "analysis": {
+        "source": "citizen_override",
+        "finalSeverity": "CRITICAL",
+        "aiSeverity": "LOW",
+        "citizenSeverity": "CRITICAL",
+        "severityBadge": "CITIZEN OVERRIDE",
+        "contradictionLevel": "NONE"
+      },
+      "decisionEngine": {
+        "recommendedAction": "ALLOCATE_RESOURCES",
+        "confidence": 0.57,
+        "riskLevel": "MEDIUM",
+        "reasoning": [
+          "Low severity event detected",
+          "Small geographic radius impact (2km)",
+          "AI fusion confidence supports priority assessment"
+        ],
+        "priorityScore": 53
+      },
+      "regionalClusterId": "cluster_24_67",
+      "radiusKm": 1.5,
+      "dataSources": [
+        "trust_fusion_heuristic"
+      ],
+      "affectedPopulation": null,
+      "impactScore": 0,
+      "householdImpact": {
+        "vulnerabilityScore": 0,
+        "totalIndividuals": 0,
+        "affectedHouseholds": 0
+      },
+      "crisisId": "AEFPGt9qtMgU7Mv11gr9",
+      "timestamp": "2026-05-20T15:57:35.956Z",
+      "confidence": 0.79,
+      "history": [],
+      "processingMode": "hybrid",
+      "severity": "CRITICAL",
+      "aiSummary": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+      "fallbackReason": "api_init_failed",
+      "description": "Heart Attack , Malaria",
+      "time": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779292656,
+        "nanoseconds": 92000000
+      },
+      "eventType": "crisis",
+      "location": {
+        "lng": 67.07163260590458,
+        "lat": 24.95571161066877,
+        "name": "Target Zone"
+      },
+      "title": "medical",
+      "rawDecision": {
+        "systemExplanation": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+        "confidence": 0.57,
+        "priorityOrder": [
+          "hybrid_heuristic"
+        ],
+        "crises": [
+          {
+            "confidence": 0.57,
+            "severity": "CRITICAL",
+            "location": {
+              "reliabilityScore": 0.34,
+              "radiusKm": 1.5,
+              "name": "Hybrid Zone"
+            },
+            "id": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+            "affectedPopulation": null,
+            "escalationPattern": "Stable",
+            "type": "Unknown",
+            "expectedDurationHours": 12
+          }
+        ]
+      }
+    },
+    {
+      "id": "K8VGfCOmjpzJXXmol6zn",
+      "decisionEngine": {
+        "riskLevel": "MEDIUM",
+        "reasoning": [
+          "Low severity event detected",
+          "Small geographic radius impact (2km)",
+          "AI fusion confidence supports priority assessment"
+        ],
+        "recommendedAction": "ALLOCATE_RESOURCES",
+        "confidence": 0.57,
+        "priorityScore": 53
+      },
+      "assignedTo": "medical_team,rescue,logistics",
+      "regionalClusterId": "cluster_24_67",
+      "dataSources": [
+        "trust_fusion_heuristic"
+      ],
+      "radiusKm": 1.5,
+      "affectedPopulation": null,
+      "assignedRole": "medical_team",
+      "impactScore": 0,
+      "crisisId": "K8VGfCOmjpzJXXmol6zn",
+      "householdImpact": {
+        "totalIndividuals": 0,
+        "affectedHouseholds": 0,
+        "vulnerabilityScore": 0
+      },
+      "keyFactors": [
+        "ai_agent_verification",
+        "multi_source_fusion"
+      ],
+      "fallbackTriggered": true,
+      "confidenceScore": 0.74,
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779274692,
+        "nanoseconds": 918000000
+      },
+      "assignedRoles": [
+        "medical_team",
+        "rescue",
+        "logistics"
+      ],
+      "status": "assigned",
+      "ciroIntelligenceId": "T0uCaqBUpVsr5lWMtd4q",
+      "citizenInput": {
+        "severity": "HIGH",
+        "description": "Earth Quake brush 2 + house in our area",
+        "userId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+        "userEmail": "hashmiayan386@gmail.com"
+      },
+      "subType": "unknown",
+      "priorityScore": 26.5,
+      "analysis": {
+        "severityBadge": "CITIZEN OVERRIDE",
+        "contradictionLevel": "NONE",
+        "aiSeverity": "LOW",
+        "citizenSeverity": "HIGH",
+        "source": "citizen_override",
+        "finalSeverity": "HIGH"
+      },
+      "fallbackReason": "timeout",
+      "aiSummary": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+      "description": "Earth Quake brush 2 + house in our area",
+      "time": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779274690,
+        "nanoseconds": 171000000
+      },
+      "eventType": "crisis",
+      "title": "earthquake",
+      "location": {
+        "lat": 24.95568753679694,
+        "lng": 67.07164836809943,
+        "name": "Target Zone"
+      },
+      "rawDecision": {
+        "systemExplanation": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+        "confidence": 0.57,
+        "priorityOrder": [
+          "hybrid_heuristic"
+        ],
+        "crises": [
+          {
+            "id": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+            "location": {
+              "reliabilityScore": 0.34,
+              "radiusKm": 1.5,
+              "name": "Hybrid Zone"
+            },
+            "confidence": 0.57,
+            "severity": "HIGH",
+            "type": "Unknown",
+            "expectedDurationHours": 12,
+            "escalationPattern": "Stable",
+            "affectedPopulation": null
+          }
+        ]
+      },
+      "confidence": 0.74,
+      "timestamp": "2026-05-20T10:58:10.022Z",
+      "history": [
+        {
+          "byName": "Coordinator",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "notes": "Incident status successfully triaged by Regional Coordinator.",
+          "timestamp": "2026-05-20T10:58:39.741Z",
+          "action": "TRIAGED"
+        },
+        {
+          "notes": "Incident field ownership updated to departments: medical_team.",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "byName": "Coordinator",
+          "action": "ASSIGNED",
+          "timestamp": "2026-05-20T10:58:51.950Z"
+        },
+        {
+          "action": "ASSIGNED",
+          "timestamp": "2026-05-20T10:59:08.597Z",
+          "by": "xPOW7lU5pbhgsEEhjyMzbUWV8Rk2",
+          "byName": "Coordinator",
+          "notes": "Incident field ownership updated to departments: medical_team, rescue, logistics."
+        }
+      ],
+      "processingMode": "hybrid",
+      "severity": "HIGH"
+    }
+  ],
+  "ciro_intelligence": [
+    {
+      "id": "GV0gcNforMznjcElQfhL",
+      "recommendedActions": [
+        "hospitals: Monitor incoming patients under fallback protocol",
+        "police: Dispatch verification team to target coordinates",
+        "utilities: Check local grid status for emergency alerts"
+      ],
+      "geoCluster": {
+        "lat": 24.955639154087653,
+        "radiusKm": 5,
+        "lng": 67.07163612536083
+      },
+      "inputs": {
+        "citizenSignals": [
+          {
+            "description": "Liver Cancer",
+            "crisisType": null,
+            "location": {
+              "reliabilityScore": 0.9,
+              "timestamp": "2026-05-20T06:43:27.896",
+              "confidence": "HIGH",
+              "lat": 24.955639154087653,
+              "accuracy": 94,
+              "source": "GPS",
+              "requiresManualDispatch": false,
+              "lng": 67.07163612536083
+            },
+            "timestamp": {
+              "type": "firestore/timestamp/1.0",
+              "seconds": 1779241422,
+              "nanoseconds": 38000000
+            },
+            "severity": "Critical"
+          }
+        ],
+        "anomalyScore": 0.04,
+        "traffic": {
+          "status": "unavailable"
+        },
+        "agreementScore": 0.57,
+        "fusionScore": 0.34,
+        "weather": {
+          "wind_speed": 5.14,
+          "description": "haze",
+          "humidity": 78,
+          "temp": 301.05,
+          "rain": null,
+          "main": "Haze"
+        },
+        "historicalIntelligence": [],
+        "ngoActivity": []
+      },
+      "analysis": {
+        "confidence": 0.57,
+        "severity": "Low",
+        "isCrisis": false,
+        "signalBreakdown": {},
+        "impactScore": 0,
+        "escalationPattern": "Stable",
+        "type": "Unknown",
+        "keyEvidence": [
+          "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified."
+        ]
+      },
+      "reasoning": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+      "rawDecision": {
+        "systemExplanation": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+        "confidence": 0.57,
+        "priorityOrder": [
+          "hybrid_heuristic"
+        ],
+        "crises": [
+          {
+            "affectedPopulation": null,
+            "escalationPattern": "Stable",
+            "type": "Unknown",
+            "expectedDurationHours": 12,
+            "confidence": 0.57,
+            "severity": "CRITICAL",
+            "id": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+            "location": {
+              "radiusKm": 1.5,
+              "name": "Hybrid Zone",
+              "reliabilityScore": 0.34
+            }
+          }
+        ]
+      },
+      "fallbackReason": "timeout",
+      "aiMode": "hybrid",
+      "linkedCrisisId": "0DnYR9QRpWAReYSc0cna",
+      "intelligenceId": "GV0gcNforMznjcElQfhL",
+      "timestamp": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779241431,
+        "nanoseconds": 817000000
+      }
+    },
+    {
+      "id": "T0uCaqBUpVsr5lWMtd4q",
+      "fallbackReason": "timeout",
+      "timestamp": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779274689,
+        "nanoseconds": 546000000
+      },
+      "intelligenceId": "T0uCaqBUpVsr5lWMtd4q",
+      "aiMode": "hybrid",
+      "linkedCrisisId": "K8VGfCOmjpzJXXmol6zn",
+      "geoCluster": {
+        "lat": 24.95568753679694,
+        "radiusKm": 5,
+        "lng": 67.07164836809943
+      },
+      "recommendedActions": [
+        "hospitals: Monitor incoming patients under fallback protocol",
+        "police: Dispatch verification team to target coordinates",
+        "utilities: Check local grid status for emergency alerts"
+      ],
+      "reasoning": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+      "rawDecision": {
+        "systemExplanation": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+        "confidence": 0.57,
+        "priorityOrder": [
+          "hybrid_heuristic"
+        ],
+        "crises": [
+          {
+            "type": "Unknown",
+            "expectedDurationHours": 12,
+            "escalationPattern": "Stable",
+            "affectedPopulation": null,
+            "id": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+            "location": {
+              "name": "Hybrid Zone",
+              "radiusKm": 1.5,
+              "reliabilityScore": 0.34
+            },
+            "severity": "HIGH",
+            "confidence": 0.57
+          }
+        ]
+      },
+      "analysis": {
+        "signalBreakdown": {},
+        "impactScore": 0,
+        "confidence": 0.57,
+        "severity": "Low",
+        "isCrisis": false,
+        "type": "Unknown",
+        "keyEvidence": [
+          "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified."
+        ],
+        "escalationPattern": "Stable"
+      },
+      "inputs": {
+        "historicalIntelligence": [],
+        "ngoActivity": [],
+        "fusionScore": 0.34,
+        "weather": {
+          "humidity": 36,
+          "main": "Haze",
+          "rain": null,
+          "temp": 308.05,
+          "wind_speed": 7.72,
+          "description": "haze"
+        },
+        "traffic": {
+          "status": "unavailable"
+        },
+        "agreementScore": 0.57,
+        "citizenSignals": [
+          {
+            "description": "Earth Quake brush 2 + house in our area",
+            "crisisType": null,
+            "severity": "High",
+            "timestamp": {
+              "type": "firestore/timestamp/1.0",
+              "seconds": 1779274678,
+              "nanoseconds": 221000000
+            },
+            "location": {
+              "lng": 67.07164836809943,
+              "requiresManualDispatch": false,
+              "accuracy": 97,
+              "source": "GPS",
+              "lat": 24.95568753679694,
+              "confidence": "HIGH",
+              "timestamp": "2026-05-20T15:57:46.457",
+              "reliabilityScore": 0.9
+            }
+          }
+        ],
+        "anomalyScore": 0.04
+      }
+    },
+    {
+      "id": "y0PynWSTHFJMRtou2g3j",
+      "inputs": {
+        "citizenSignals": [
+          {
+            "severity": "Critical",
+            "timestamp": {
+              "type": "firestore/timestamp/1.0",
+              "seconds": 1779292650,
+              "nanoseconds": 946000000
+            },
+            "location": {
+              "accuracy": 102,
+              "source": "GPS",
+              "requiresManualDispatch": false,
+              "lng": 67.07163260590458,
+              "reliabilityScore": 0.9,
+              "timestamp": "2026-05-20T20:57:19.509",
+              "confidence": "HIGH",
+              "lat": 24.95571161066877
+            },
+            "description": "Heart Attack , Malaria",
+            "crisisType": null
+          }
+        ],
+        "anomalyScore": 0.04,
+        "traffic": {
+          "status": "unavailable"
+        },
+        "agreementScore": 0.57,
+        "weather": {
+          "humidity": 62,
+          "temp": 303.05,
+          "rain": null,
+          "main": "Haze",
+          "wind_speed": 8.75,
+          "description": "haze"
+        },
+        "fusionScore": 0.34,
+        "historicalIntelligence": [
+          {
+            "severity": "Low",
+            "timestamp": {
+              "type": "firestore/timestamp/1.0",
+              "seconds": 1779274689,
+              "nanoseconds": 860000000
+            },
+            "confidence": 0.57,
+            "type": "Unknown",
+            "escalationPattern": "Stable"
+          }
+        ],
+        "ngoActivity": []
+      },
+      "reasoning": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+      "rawDecision": {
+        "systemExplanation": "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified.",
+        "confidence": 0.57,
+        "priorityOrder": [
+          "hybrid_heuristic"
+        ],
+        "crises": [
+          {
+            "id": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+            "location": {
+              "radiusKm": 1.5,
+              "name": "Hybrid Zone",
+              "reliabilityScore": 0.34
+            },
+            "confidence": 0.57,
+            "severity": "CRITICAL",
+            "type": "Unknown",
+            "expectedDurationHours": 12,
+            "affectedPopulation": null,
+            "escalationPattern": "Stable"
+          }
+        ]
+      },
+      "analysis": {
+        "escalationPattern": "Stable",
+        "type": "Unknown",
+        "keyEvidence": [
+          "Incident prioritized via hybrid geospatial telemetry. Active situational monitoring initiated. Dispatch channels notified."
+        ],
+        "isCrisis": false,
+        "severity": "Low",
+        "confidence": 0.57,
+        "signalBreakdown": {},
+        "impactScore": 0
+      },
+      "recommendedActions": [
+        "hospitals: Monitor incoming patients under fallback protocol",
+        "police: Dispatch verification team to target coordinates",
+        "utilities: Check local grid status for emergency alerts"
+      ],
+      "geoCluster": {
+        "lat": 24.95571161066877,
+        "radiusKm": 5,
+        "lng": 67.07163260590458
+      },
+      "aiMode": "hybrid",
+      "linkedCrisisId": "AEFPGt9qtMgU7Mv11gr9",
+      "intelligenceId": "y0PynWSTHFJMRtou2g3j",
+      "timestamp": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779292655,
+        "nanoseconds": 481000000
+      },
+      "fallbackReason": "api_init_failed"
+    }
+  ],
+  "event_queue": [
+    {
+      "id": "0DnYR9QRpWAReYSc0cna",
+      "payload": {
+        "userId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+        "description": "Liver Cancer",
+        "eventType": "crisis",
+        "subType": "medical",
+        "userEmail": "hashmiayan386@gmail.com",
+        "severity": "Critical",
+        "householdId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+        "location": {
+          "confidence": "HIGH",
+          "timestamp": "2026-05-20T06:43:27.896",
+          "reliabilityScore": 0.9,
+          "lat": 24.955639154087653,
+          "requiresManualDispatch": false,
+          "source": "GPS",
+          "accuracy": 94,
+          "lng": 67.07163612536083
+        }
+      },
+      "failureReason": null,
+      "status": "completed",
+      "eventId": "0DnYR9QRpWAReYSc0cna",
+      "subType": "medical",
+      "eventType": "crisis",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779241409,
+        "nanoseconds": 929000000
+      },
+      "retryCount": 0,
+      "completedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779241433,
+        "nanoseconds": 508000000
+      },
+      "timestamp": "2026-05-20T06:43:27.897"
+    },
+    {
+      "id": "AEFPGt9qtMgU7Mv11gr9",
+      "timestamp": "2026-05-20T20:57:19.511",
+      "completedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779292657,
+        "nanoseconds": 13000000
+      },
+      "retryCount": 0,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779292641,
+        "nanoseconds": 474000000
+      },
+      "subType": "medical",
+      "eventType": "crisis",
+      "eventId": "AEFPGt9qtMgU7Mv11gr9",
+      "status": "completed",
+      "failureReason": null,
+      "payload": {
+        "userEmail": "hashmiayan386@gmail.com",
+        "subType": "medical",
+        "userId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+        "description": "Heart Attack , Malaria",
+        "eventType": "crisis",
+        "location": {
+          "reliabilityScore": 0.9,
+          "confidence": "HIGH",
+          "timestamp": "2026-05-20T20:57:19.509",
+          "lat": 24.95571161066877,
+          "source": "GPS",
+          "accuracy": 102,
+          "requiresManualDispatch": false,
+          "lng": 67.07163260590458
+        },
+        "householdId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+        "severity": "Critical"
+      }
+    },
+    {
+      "id": "K8VGfCOmjpzJXXmol6zn",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779274668,
+        "nanoseconds": 818000000
+      },
+      "retryCount": 0,
+      "timestamp": "2026-05-20T15:57:46.462",
+      "completedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779274691,
+        "nanoseconds": 76000000
+      },
+      "status": "completed",
+      "eventId": "K8VGfCOmjpzJXXmol6zn",
+      "eventType": "crisis",
+      "subType": "earthquake",
+      "failureReason": null,
+      "payload": {
+        "userEmail": "hashmiayan386@gmail.com",
+        "description": "Earth Quake brush 2 + house in our area",
+        "eventType": "crisis",
+        "subType": "earthquake",
+        "userId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+        "location": {
+          "lat": 24.95568753679694,
+          "reliabilityScore": 0.9,
+          "confidence": "HIGH",
+          "timestamp": "2026-05-20T15:57:46.457",
+          "lng": 67.07164836809943,
+          "source": "GPS",
+          "accuracy": 97,
+          "requiresManualDispatch": false
+        },
+        "householdId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+        "severity": "High"
+      }
+    }
+  ],
+  "users": [
+    {
+      "id": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+      "isActive": true,
+      "location": {
+        "homeLat": 24.955603,
+        "lastKnownLat": 24.95570705869094,
+        "lastKnownLng": 67.07161786663704,
+        "updatedAt": {
+          "type": "firestore/timestamp/1.0",
+          "seconds": 1779293958,
+          "nanoseconds": 114000000
+        },
+        "homeLng": 67.071495
+      },
+      "vulnerabilityTags": [
+        "vulnerability: health"
+      ],
+      "riskScore": 100,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779207288,
+        "nanoseconds": 714000000
+      },
+      "totalReports": 12,
+      "uid": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+      "lastActiveAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779292656,
+        "nanoseconds": 706000000
+      },
+      "recentCrisisInteraction": "Medical",
+      "email": "hashmiayan386@gmail.com",
+      "profile": {
+        "gender": "Male",
+        "age": 19,
+        "displayName": "Muhammad Ayan Hashmi",
+        "phone": "03343488425"
+      },
+      "permissions": {
+        "notificationEnabled": true,
+        "locationEnabled": true
+      },
+      "lastActiveLocation": {
+        "lng": 67.07163260590458,
+        "lat": 24.95571161066877
+      },
+      "stats": {
+        "totalAidRequests": 0,
+        "totalReports": 12,
+        "riskScore": 100,
+        "lastActiveAt": {
+          "type": "firestore/timestamp/1.0",
+          "seconds": 1779292656,
+          "nanoseconds": 706000000
+        },
+        "recentCrisisInteraction": "Medical",
+        "vulnerabilityTags": [
+          "vulnerability: health"
+        ]
+      },
+      "role": "citizen"
+    },
+    {
+      "id": "WyPR6xIKzYWML3h51Tq9xv7JYEc2",
+      "displayName": "Demo Citizen",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779283682,
+        "nanoseconds": 840000000
+      },
+      "role": "citizen",
+      "department": "Citizen Reporter",
+      "clearance": "CITIZEN_REPORT",
+      "isDemo": true,
+      "email": "citizen@crisisnexus.demo",
+      "uid": "WyPR6xIKzYWML3h51Tq9xv7JYEc2"
+    },
+    {
+      "id": "a2KzkZVyzsgbdl6p1ox8pakXF4h1",
+      "role": "observer",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779283680,
+        "nanoseconds": 543000000
+      },
+      "name": "Obeserver",
+      "displayName": "UN Observer",
+      "department": "External Observer / Read-Only",
+      "isActive": true,
+      "uid": "a2KzkZVyzsgbdl6p1ox8pakXF4h1",
+      "email": "observer@crisisnexus.demo",
+      "clearance": "READ_ONLY",
+      "isDemo": true,
+      "ngoId": "GLOBAL",
+      "phone": "03172054252"
+    }
+  ],
+  "signals": [
+    {
+      "id": "0DnYR9QRpWAReYSc0cna",
+      "aiMode": "hybrid",
+      "userId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+      "metadata": {
+        "degradedModeApplied": false,
+        "source": "server_functions_queue",
+        "priorityScore": 4
+      },
+      "severity": "Critical",
+      "status": "active",
+      "subType": "medical",
+      "userEmail": "hashmiayan386@gmail.com",
+      "signalId": "0DnYR9QRpWAReYSc0cna",
+      "description": "Liver Cancer",
+      "fallbackReason": "timeout",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779241422,
+        "nanoseconds": 38000000
+      },
+      "location": {
+        "confidence": "HIGH",
+        "timestamp": "2026-05-20T06:43:27.896",
+        "reliabilityScore": 0.9,
+        "lat": 24.955639154087653,
+        "requiresManualDispatch": false,
+        "source": "GPS",
+        "accuracy": 94,
+        "lng": 67.07163612536083
+      },
+      "eventType": "crisis"
+    },
+    {
+      "id": "AEFPGt9qtMgU7Mv11gr9",
+      "signalId": "AEFPGt9qtMgU7Mv11gr9",
+      "description": "Heart Attack , Malaria",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779292650,
+        "nanoseconds": 946000000
+      },
+      "fallbackReason": "api_init_failed",
+      "location": {
+        "reliabilityScore": 0.9,
+        "confidence": "HIGH",
+        "timestamp": "2026-05-20T20:57:19.509",
+        "lat": 24.95571161066877,
+        "accuracy": 102,
+        "source": "GPS",
+        "requiresManualDispatch": false,
+        "lng": 67.07163260590458
+      },
+      "eventType": "crisis",
+      "aiMode": "hybrid",
+      "userId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+      "metadata": {
+        "source": "server_functions_queue",
+        "degradedModeApplied": false,
+        "priorityScore": 4
+      },
+      "severity": "Critical",
+      "subType": "medical",
+      "status": "active",
+      "userEmail": "hashmiayan386@gmail.com"
+    },
+    {
+      "id": "K8VGfCOmjpzJXXmol6zn",
+      "userId": "JWvM3mzZpRXwE4iYrNxTqTXcaye2",
+      "metadata": {
+        "degradedModeApplied": false,
+        "source": "server_functions_queue",
+        "priorityScore": 3
+      },
+      "aiMode": "hybrid",
+      "status": "active",
+      "subType": "earthquake",
+      "userEmail": "hashmiayan386@gmail.com",
+      "severity": "High",
+      "description": "Earth Quake brush 2 + house in our area",
+      "fallbackReason": "timeout",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1779274678,
+        "nanoseconds": 221000000
+      },
+      "signalId": "K8VGfCOmjpzJXXmol6zn",
+      "eventType": "crisis",
+      "location": {
+        "requiresManualDispatch": false,
+        "source": "GPS",
+        "accuracy": 97,
+        "lng": 67.07164836809943,
+        "confidence": "HIGH",
+        "timestamp": "2026-05-20T15:57:46.457",
+        "reliabilityScore": 0.9,
+        "lat": 24.95568753679694
+      }
+    }
+  ]
+}

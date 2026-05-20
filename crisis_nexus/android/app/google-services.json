@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1095654129175",
+    "project_id": "crisisnexus-bf9fc",
+    "storage_bucket": "crisisnexus-bf9fc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095654129175:android:34abc7704648879d6fe652",
+        "android_client_info": {
+          "package_name": "com.example.crisis_nexus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhUeywV-xVCCmkuAZLmw5vmoPoOZgcK_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
