@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+    <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="pulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#60a5fa"/>
+      <stop offset="60%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="shieldClip">
+      <path d="M32 4 L56 14 L56 36 Q56 52 32 60 Q8 52 8 36 L8 14 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Shield background -->
+  <path d="M32 4 L56 14 L56 36 Q56 52 32 60 Q8 52 8 36 L8 14 Z"
+        fill="url(#bgGrad)" stroke="url(#radarGrad)" stroke-width="1.5"/>
+
+  <!-- Radar rings (clipped to shield) -->
+  <g clip-path="url(#shieldClip)" opacity="0.35">
+    <circle cx="32" cy="34" r="8"  fill="none" stroke="url(#radarGrad)" stroke-width="0.8"/>
+    <circle cx="32" cy="34" r="14" fill="none" stroke="url(#radarGrad)" stroke-width="0.8"/>
+    <circle cx="32" cy="34" r="20" fill="none" stroke="url(#radarGrad)" stroke-width="0.8"/>
+    <circle cx="32" cy="34" r="26" fill="none" stroke="url(#radarGrad)" stroke-width="0.8"/>
+  </g>
+
+  <!-- Crosshair lines -->
+  <g clip-path="url(#shieldClip)" opacity="0.25" stroke="url(#radarGrad)" stroke-width="0.6">
+    <line x1="32" y1="4" x2="32" y2="60"/>
+    <line x1="8"  y1="34" x2="56" y2="34"/>
+  </g>
+
+  <!-- Heartbeat / pulse wave -->
+  <polyline clip-path="url(#shieldClip)"
+    points="10,34 18,34 21,26 24,42 27,30 30,37 33,22 36,46 39,34 46,34 54,34"
+    fill="none" stroke="url(#pulseGrad)" stroke-width="2.2"
+    stroke-linecap="round" stroke-linejoin="round"
+    filter="url(#glow)"/>
+
+  <!-- Center dot -->
+  <circle cx="32" cy="34" r="2.5" fill="#ef4444" filter="url(#glow)"/>
+
+  <!-- Shield top accent bar -->
+  <path d="M32 4 L56 14 L54 15 L32 6 L10 15 L8 14 Z" fill="url(#radarGrad)" opacity="0.7"/>
+</svg>

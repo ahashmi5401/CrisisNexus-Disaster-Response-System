@@ -1,0 +1,274 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =========================================================
+    // 🧠 CORE SAFETY HELPERS (LOCKOUT SAFE)
+    // =========================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function role() {
+      return isAuthenticated() ? (
+        request.auth.token.get('role', null) != null ? request.auth.token.role : (
+          exists(path('/databases/' + database + '/documents/users/' + request.auth.uid)) ?
+            get(path('/databases/' + database + '/documents/users/' + request.auth.uid)).data.role : null
+        )
+      ) : null;
+    }
+
+    function isActiveUser() {
+      // NO HARD LOCKOUT: fallback-safe
+      return isAuthenticated() &&
+        (request.auth.token.get('isActive', false) == true || request.auth.uid != null);
+    }
+
+    function isNGOWorkforce() {
+      return isAuthenticated() && (
+        role() in [
+          'coordinator',
+          'medical_team',
+          'logistics',
+          'rescue',
+          'observer'
+        ]
+      );
+    }
+
+    function isCoordinator() {
+      return isAuthenticated() && role() == 'coordinator';
+    }
+
+    // =========================================================
+    // 👤 USERS
+    // =========================================================
+    match /users/{uid} {
+
+      allow read: if isAuthenticated() &&
+        (request.auth.uid == uid || isNGOWorkforce());
+
+      allow create: if isAuthenticated()
+        && request.auth.uid == uid
+        && request.resource.data.role in [
+          'citizen',
+          'coordinator',
+          'medical_team',
+          'logistics',
+          'rescue',
+          'observer'
+        ];
+
+      allow update: if isAuthenticated()
+        && request.auth.uid == uid
+        && request.resource.data.role == resource.data.role
+        && request.resource.data.isActive == resource.data.isActive
+        && request.resource.data.diff(resource.data)
+            .affectedKeys()
+            .hasOnly(['profile', 'location', 'permissions', 'name', 'phone']);
+
+      allow delete: if isCoordinator();
+    }
+
+    // =========================================================
+    // 🏢 NGOS
+    // =========================================================
+    match /ngos/{ngoId} {
+      allow read: if isNGOWorkforce();
+      allow write: if isCoordinator();
+    }
+
+    // =========================================================
+    // 🚨 CRISES (CORE SYSTEM)
+    // =========================================================
+    match /crises/{crisisId} {
+
+      allow read: if isNGOWorkforce() || (isActiveUser()); // Kept broad for Citizen App compatibility for now.
+
+      allow create: if isNGOWorkforce();
+
+      allow update: if isNGOWorkforce()
+        && request.resource.data.keys().hasAll(resource.data.keys())
+        && request.resource.data.diff(resource.data)
+            .affectedKeys()
+            .hasOnly([
+              'history',
+              'status',
+              'assignedTo',
+              'assignedRole',
+              'assignedRoles',
+              'medicalNotes',
+              'suppliesDetails',
+              'assignedTeam',
+              'severity',
+              'severityString',
+              'updatedAt',
+              'location'
+            ]);
+
+      allow delete: if isCoordinator();
+    }
+
+    // =========================================================
+    // 🛰️ SIGNALS (IMMUTABLE)
+    // =========================================================
+    match /signals/{signalId} {
+
+      allow create: if isAuthenticated()
+        && request.resource.data.userId == request.auth.uid;
+
+      allow read: if isAuthenticated()
+        && (
+          resource.data.userId == request.auth.uid ||
+          isNGOWorkforce()
+        );
+
+      allow update, delete: if false;
+    }
+
+    // =========================================================
+    // 📦 EVENT QUEUE (STRICT + SAFE)
+    // =========================================================
+    match /event_queue/{eventId} {
+
+      allow create: if isAuthenticated()
+        && request.resource.data.payload is map
+        && request.resource.data.payload.userId is string
+        && request.resource.data.payload.userId == request.auth.uid
+        && request.resource.data.keys().hasOnly([
+          'eventId',
+          'eventType',
+          'subType',
+          'status',
+          'payload',
+          'timestamp',
+          'createdAt',
+          'retryCount',
+          'failureReason'
+        ]);
+
+      allow read: if isAuthenticated()
+        && (resource.data.payload.userId == request.auth.uid || isNGOWorkforce());
+
+      allow update: if isNGOWorkforce();
+      allow delete: if false;
+    }
+
+    // =========================================================
+    // 📜 RELIEF REQUESTS
+    // =========================================================
+    match /relief_requests/{requestId} {
+
+      allow create: if isAuthenticated()
+        && request.resource.data.userId == request.auth.uid;
+
+      allow read: if isAuthenticated()
+        && (
+          resource.data.userId == request.auth.uid ||
+          isNGOWorkforce()
+        );
+
+      allow update: if isAuthenticated()
+        && (
+          (request.auth.uid == resource.data.userId
+            && !request.resource.data.diff(resource.data)
+                .affectedKeys()
+                .hasAny(['status', 'allocatedBy'])
+          )
+          || (
+            isNGOWorkforce() && (
+              (role() == 'medical_team' && request.resource.data.status.upper() == 'VERIFIED' && resource.data.status.upper() == 'PENDING') ||
+              (role() == 'logistics' && (
+                (request.resource.data.status.upper() == 'DISPATCHED' && resource.data.status.upper() == 'APPROVED') ||
+                (request.resource.data.status.upper() == 'DELIVERED' && resource.data.status.upper() == 'DISPATCHED')
+              )) ||
+              (role() == 'coordinator' && (
+                (request.resource.data.status.upper() == 'APPROVED' && (resource.data.status.upper() == 'PENDING' || resource.data.status.upper() == 'VERIFIED')) ||
+                (request.resource.data.status.upper() == 'CLOSED' && resource.data.status.upper() == 'DELIVERED')
+              ))
+            )
+          )
+        );
+
+      allow delete: if false;
+    }
+
+    // =========================================================
+    // 👨👩👧 FAMILY PROFILES
+    // =========================================================
+    match /family_profiles/{uid} {
+
+      allow read: if isAuthenticated()
+        && (request.auth.uid == uid || isNGOWorkforce());
+
+      allow write: if isAuthenticated()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['members', 'address', 'location']);
+
+      match /members/{memberId} {
+        allow read: if isAuthenticated()
+          && (request.auth.uid == uid || isNGOWorkforce());
+
+        allow write: if isAuthenticated()
+          && request.auth.uid == uid;
+      }
+    }
+
+    // =========================================================
+    // 🧠 CRISIS INTELLIGENCE
+    // =========================================================
+    match /crisis_intelligence/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isNGOWorkforce();
+    }
+
+    match /crisis_intelligence_history/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isNGOWorkforce();
+    }
+
+    match /ciro_intelligence/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isNGOWorkforce();
+    }
+
+    match /ciro_intelligence_history/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isNGOWorkforce();
+    }
+
+    // =========================================================
+    // 📢 COORDINATOR ALERTS (BROADCAST SYSTEM)
+    // =========================================================
+    match /alerts/{alertId} {
+      // Any authenticated user (NGO + citizen) can read active broadcasts
+      allow read: if isAuthenticated();
+
+      // NGO workforce can create alerts (coordinator-only enforced client-side)
+      allow create: if isNGOWorkforce()
+        && request.resource.data.keys().hasOnly([
+          'message', 'targetRole', 'createdBy', 'createdAt', 'isActive'
+        ])
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.isActive == true;
+
+      // NGO workforce can deactivate (flip isActive only)
+      allow update: if isNGOWorkforce()
+        && request.resource.data.diff(resource.data)
+            .affectedKeys()
+            .hasOnly(['isActive']);
+
+      allow delete: if isNGOWorkforce();
+    }
+
+    // =========================================================
+    // ❌ GLOBAL DENY FALLBACK
+    // =========================================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
